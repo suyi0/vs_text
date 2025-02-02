@@ -4,10 +4,10 @@
 
 int main()
 {
-	int a = 0;
-	for (a = 0; a < 10; a++)
-	{
-		printf("hello world\n");
-	}
+	int arr[2][5] = { 1,2,3,4,5,6,7,8,9,10 };
+	int* ptr1 = (int*)(&arr + 1);
+	int* ptr2 = (int*)(*(arr + 1));
+
+	printf("%d,%d\n", *(ptr1 - 1), *(ptr2 - 1));
 	return 0;
 }
