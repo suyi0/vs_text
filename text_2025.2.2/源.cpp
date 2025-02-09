@@ -25,11 +25,12 @@ int main()
 {
 	const char* c[] = { "ENTER","NEW","POINT","FIRST" };
 	const char** cp[] = { c + 3,c + 2,c + 1,c };
+	//connst char** cp[]={"FIRST","POINT","NEW","ENTER"}
 	const char*** cpp = cp;
 
-	printf("%s\n", **++cpp);
-	printf("%s\n", *--*++cpp + 3);
-	printf("%s\n", *cpp[-2] + 3);
-	printf("%s\n", cpp[-1][+1] + 1);
+	printf("%s\n", **++cpp);//POINT
+	printf("%s\n", *--*++cpp + 3);//ER
+	printf("%s\n", *cpp[-2] + 3);//ST
+	printf("%s\n", cpp[-1][-1] + 1);//
 	return 0;
 }
