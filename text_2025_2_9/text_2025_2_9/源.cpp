@@ -31,13 +31,13 @@ void reverse(void* str,int sz,int width)
 	void* left = str;
 	void* right = (char*)str + sz * width - width;
 
-	if (width == 1)
-	{
+	/*if (width == 1)
+	{*/
 		for (int i = 0; i < sz; i++)
 		{
 			if (left < right)
 			{
-				char  temp = *(char*)left;
+				int  temp = *(char*)left;
 				*(char*)left = *(char*)right;
 				*(char*)right = temp;
 				left = (char*)left + 1 * width;
@@ -46,9 +46,9 @@ void reverse(void* str,int sz,int width)
 			else
 				break;
 		}
-	}
-	else
-	for (int i = 0; i < sz; i++)
+	//}
+	/*else*/
+	/*for (int i = 0; i < sz; i++)
 	{
 		if (left < right)
 		{
@@ -60,7 +60,7 @@ void reverse(void* str,int sz,int width)
 		}
 		else
 			break;
-	}
+	}*/
 }
 
 int main()
