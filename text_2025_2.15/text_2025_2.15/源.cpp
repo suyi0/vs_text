@@ -3,6 +3,7 @@
 #include<stdio.h>
 #include<math.h>
 #include<string.h>
+#include<stdlib.h>
 
 //void rever(void* str, int sz)
 //{
@@ -79,14 +80,74 @@
 //	return 0;
 //}
 
+//int main()
+//{
+//	int n = 153;
+//	int hundreds = n / 100;
+//	int tens = n / 10 - hundreds * 10;
+//	int ones = n % 10;
+//	printf("%d\n", hundreds);
+//	printf("%d\n", tens);
+//	printf("%d\n", ones);
+//	return 0;
+//}
+
+
+void* up(char* str, int i, int n,int width)
+{
+	int o = 0;
+	if (i <= n / 2)
+	{
+		void* left = (char*)str + (n / 2 - i) * width;
+		void* right = (char*)str + (n / 2 + i) * width;
+		*(char*)left = '*';
+		*(char*)right = '*';
+	}
+	return str;
+}
+void* under(char* str, int i, int n, int width)
+{
+	void* left = (char*)str + (n / 2 - i) * width;
+	void* right = (char*)str + (n / 2 + i) * width;
+	*(char*)left = ' ';
+	*(char*)right = ' ';
+	return str;
+}
+
 int main()
 {
-	int n = 153;
-	int hundreds = n / 100;
-	int tens = n / 10 - hundreds * 10;
-	int ones = n % 10;
-	printf("%d\n", hundreds);
-	printf("%d\n", tens);
-	printf("%d\n", ones);
+	int n = 0;
+	int i = 0;
+	int j = 0;
+	int width = 0;
+	printf("请输入你要显示的行数>:");
+	scanf("%d", &n);
+	char* arr = (char*) malloc((n+1) * sizeof(char));
+	if (arr == NULL)
+	{
+		printf("退出!!!");
+		return 0;
+	}
+	for (j = 0; j < n; j++)
+	{
+		arr[j] = ' ';
+	}
+	arr[n] = 0;
+	width = sizeof(arr[0]);
+	for (i = 0; i <= n/2 ; i++)
+	{
+		up(arr,i, n,width);
+		printf("   %s\n", arr);
+	}
+	for (i = (n / 2 ); i > 0; i--)
+	{
+		under(arr, i, n, width);
+		printf("   %s\n", arr);
+	}
+	if (arr != NULL)
+	{
+		free(arr);
+		arr = NULL;
+	}
 	return 0;
 }
