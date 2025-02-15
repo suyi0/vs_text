@@ -93,61 +93,145 @@
 //}
 
 
-void* up(char* str, int i, int n,int width)
+//void* up(char* str, int i, int n,int width)
+//{
+//	int o = 0;
+//	if (i <= n / 2)
+//	{
+//		void* left = (char*)str + (n / 2 - i) * width;
+//		void* right = (char*)str + (n / 2 + i) * width;
+//		*(char*)left = '*';
+//		*(char*)right = '*';
+//	}
+//	return str;
+//}
+//void* under(char* str, int i, int n, int width)
+//{
+//	void* left = (char*)str + (n / 2 - i) * width;
+//	void* right = (char*)str + (n / 2 + i) * width;
+//	*(char*)left = ' ';
+//	*(char*)right = ' ';
+//	return str;
+//}
+//
+//int main()
+//{
+//	int n = 0;
+//	int i = 0;
+//	int j = 0;
+//	int width = 0;
+//	printf("请输入你要显示的行数(为奇数)>:");
+//	scanf("%d", &n);
+//	char* arr = (char*) malloc((n+1) * sizeof(char));
+//	if (arr == NULL)
+//	{
+//		printf("退出!!!");
+//		return 0;
+//	}
+//	//打印空格
+//	for (j = 0; j < n; j++)
+//	{
+//		arr[j] = ' ';
+//	}
+//	arr[n] = 0;
+//	width = sizeof(arr[0]);
+//	//打印上半部分
+//	for (i = 0; i <= n/2 ; i++)
+//	{
+//		up(arr,i, n,width);
+//		printf("   %s\n", arr);
+//	}
+//	//打印下半部分
+//	for (i = (n / 2 ); i > 0; i--)
+//	{
+//		under(arr, i, n, width);
+//		printf("   %s\n", arr);
+//	}
+//	if (arr != NULL)
+//	{
+//		free(arr);
+//		arr = NULL;
+//	}
+//	return 0;
+//}
+
+//int main()
+//{
+//	int money = 0;
+//	int empty = 0;
+//	int total = 0;
+//	printf("你的钱数__,__杯可以换一杯\n");
+//	scanf("%d %d", &money,&empty);
+//	total = money;
+//	for (money; money >= empty; )
+//	{
+//		total = total + money / empty;
+//		money = money / empty + money % empty;
+//	}
+//	printf("可以喝 %d 杯", total);
+//	return 0;
+//}
+
+
+////乱序排奇数在偶数前
+//int move_int(const void* e1, const void* e2)
+//{
+//	return -(*(int*)e1 % 2 - *(int*)e2 % 2);
+//}
+//
+//int main()
+//{
+//	int arr[] = { 1,2,3,4,5,6,7,8,9,10 };
+//	int i = 0;
+//	int sz = sizeof(arr) / sizeof(arr[0]);
+//	int width = sizeof(width);
+//	qsort(arr, sz, width,move_int);
+//	for (i = 0; i < sz; i++)
+//	{
+//		printf("%d ", arr[i]);
+//	}
+//	return 0;
+//}
+
+void print(int arr[], int sz)
 {
-	int o = 0;
-	if (i <= n / 2)
+	for (int i = 0; i < sz; i++)
 	{
-		void* left = (char*)str + (n / 2 - i) * width;
-		void* right = (char*)str + (n / 2 + i) * width;
-		*(char*)left = '*';
-		*(char*)right = '*';
+		printf("%d ", arr[i]);
 	}
-	return str;
 }
-void* under(char* str, int i, int n, int width)
+
+void move(int arr[], int sz)
 {
-	void* left = (char*)str + (n / 2 - i) * width;
-	void* right = (char*)str + (n / 2 + i) * width;
-	*(char*)left = ' ';
-	*(char*)right = ' ';
-	return str;
+	int left = 0;
+	int right = sz - 1;
+	while (left < right)
+	{
+		//从左边找偶数
+		while ((left < right) && arr[left] % 2 == 1)
+		{
+			left++;
+		}
+		//从右边找奇数
+		while ((left < right) && arr[right] % 2 == 0)
+		{
+			right--;
+		}
+		//交换
+		if (left < right)
+		{
+			int temp = arr[left];
+			arr[left] = arr[right];
+			arr[right] = temp;
+		}
+	}
 }
 
 int main()
 {
-	int n = 0;
-	int i = 0;
-	int j = 0;
-	int width = 0;
-	printf("请输入你要显示的行数>:");
-	scanf("%d", &n);
-	char* arr = (char*) malloc((n+1) * sizeof(char));
-	if (arr == NULL)
-	{
-		printf("退出!!!");
-		return 0;
-	}
-	for (j = 0; j < n; j++)
-	{
-		arr[j] = ' ';
-	}
-	arr[n] = 0;
-	width = sizeof(arr[0]);
-	for (i = 0; i <= n/2 ; i++)
-	{
-		up(arr,i, n,width);
-		printf("   %s\n", arr);
-	}
-	for (i = (n / 2 ); i > 0; i--)
-	{
-		under(arr, i, n, width);
-		printf("   %s\n", arr);
-	}
-	if (arr != NULL)
-	{
-		free(arr);
-		arr = NULL;
-	}
+	int arr[] = { 1,2,3,4,5,6,7,8,9,10 };
+	int sz= sizeof(arr) / sizeof(arr[0]);
+	move(arr,sz);
+	print(arr, sz);
 	return 0;
 }
